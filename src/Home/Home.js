@@ -1,9 +1,12 @@
 import React from 'react';
+import AddPost from './AddPost';
+import ViewPost from './ViewPost';
 
 const Home = () => {
     return (
         <div>
-            this is home.
+            <AddPost></AddPost>
+            <ViewPost></ViewPost>
         </div>
     );
 };

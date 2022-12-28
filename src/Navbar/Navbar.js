@@ -12,7 +12,7 @@ const Navbar = () => {
     <ul className="menu menu-horizontal px-1">
       <li><Link to='/allPost'>Item 1</Link></li>
       
-      <li><Link>Item 3</Link></li>
+      <li><Link to='/about'>Item 3</Link></li>
     </ul>
   </div>
 </div>
