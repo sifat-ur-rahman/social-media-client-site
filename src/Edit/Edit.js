@@ -9,7 +9,7 @@ const Edit = ({dataAbout}) => {
 
   const handleAddEdit = data =>{
     // console.log(data);
-    fetch( `http://localhost:5000/about/${dataAbout._id}`,{
+    fetch( `https://social-media-server-gray.vercel.app/about/${dataAbout._id}`,{
       method: 'PUT',
       
         headers:{

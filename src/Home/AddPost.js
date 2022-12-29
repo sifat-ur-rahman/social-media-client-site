@@ -28,7 +28,7 @@ const AddPost = () => {
             }
             console.log(post);
 
-            fetch('http://localhost:5000/addPost',{
+            fetch('https://social-media-server-gray.vercel.app/addPost',{
                 method: 'POST',
                 headers:{
                     'content-type': 'application/json',

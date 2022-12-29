@@ -18,23 +18,23 @@ export const routes = createBrowserRouter([
             {
                 path:'/',
                 element: <Home></Home>,
-                loader: () => fetch (`http://localhost:5000/3posts`)
+                loader: () => fetch (`https://social-media-server-gray.vercel.app/3posts`)
             },
             {
                 path: '/allPost',
                 element: <AllPost></AllPost>,
-                loader: () => fetch (`http://localhost:5000/viewPost`)
+                loader: () => fetch (`https://social-media-server-gray.vercel.app/viewPost`)
             },
             {
                 path: '/details/:id',
                 element: <PrivateRoute><Details></Details></PrivateRoute>,
-                loader: ({params}) => fetch (`http://localhost:5000/details/${params.id}`),
+                loader: ({params}) => fetch (`https://social-media-server-gray.vercel.app/details/${params.id}`),
                
             },
             {
                 path: '/about',
                 element: <About></About> ,
-                loader: () => fetch (`http://localhost:5000/about`)
+                loader: () => fetch (`https://social-media-server-gray.vercel.app/about`)
             },
             {
                 path: '/login',
@@ -47,7 +47,7 @@ export const routes = createBrowserRouter([
             {
                 path: '/comment/:id',
                 element: <Comment></Comment>,
-                loader: ({params}) => fetch (`http://localhost:5000/comment/${params.id}`),
+                loader: ({params}) => fetch (`https://social-media-server-gray.vercel.app/comment/${params.id}`),
             }
         ]
     }

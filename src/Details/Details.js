@@ -2,12 +2,12 @@ import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useLoaderData, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Contexts/AuthProvider';
-import Comment from './Comment';
+
 
 const Details = () => {
   const details = useLoaderData()
   const {user,loading} = useContext(AuthContext)
-  const refresh = () => window.location.reload(true)
+ 
   const id = details._id
   // console.log(details);
 // console.log(user);
@@ -22,7 +22,7 @@ const navigate = useNavigate()
       name: user.displayName
     }
 
-    fetch('http://localhost:5000/addComment',{
+    fetch('https://social-media-server-gray.vercel.app/addComment',{
                 method: 'POST',
                 headers:{
                     'content-type': 'application/json',
@@ -56,7 +56,7 @@ const navigate = useNavigate()
     <input className='btn btn-accent w-40 m-5 '  value = 'Comment' type="submit" />
     </div>
     </form>
-    <Link to={`/comment/${id}`}>See Comment</Link>
+    <Link className="btn btn-sm" to={`/comment/${id}`}>See Comment</Link>
     
   </div>
 </div>
