@@ -19,6 +19,8 @@ const Navbar = () => {
   <div className="flex-none">
     <ul className="menu menu-horizontal px-1">
       <li><Link to='/allPost'>All Post</Link></li>
+      <li><Link >Massage</Link></li>
+      <li><Link >Media</Link></li>
       {user?.uid ?  
           <>
           

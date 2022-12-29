@@ -4,7 +4,7 @@ import AllPostCard from './AllPostCard';
 
 const AllPost = () => {
     const allPost = useLoaderData()
-    console.log(allPost);
+    // console.log(allPost);
     return (
         <div className='grid justify-center mt-6 mb-6'>
            {

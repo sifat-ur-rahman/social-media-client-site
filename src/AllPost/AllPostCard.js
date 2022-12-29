@@ -5,7 +5,7 @@ import { FaRegThumbsUp } from "react-icons/fa";
 const AllPostCard = ({data}) => {
   
   const {address, mind, img, _id} = data
-  console.log(address);
+  // console.log(address);
   const [count, setCount] = useState(3)
   
   const increaseCount = () =>{

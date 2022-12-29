@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import About from "../About/About";
 import AllPost from "../AllPost/AllPost";
+import Comment from "../Details/Comment";
 import Details from "../Details/Details";
 import Home from "../Home/Home";
 import Main from "../Layout/Main";
@@ -27,7 +28,8 @@ export const routes = createBrowserRouter([
             {
                 path: '/details/:id',
                 element: <PrivateRoute><Details></Details></PrivateRoute>,
-                loader: ({params}) => fetch (`http://localhost:5000/details/${params.id}`)
+                loader: ({params}) => fetch (`http://localhost:5000/details/${params.id}`),
+               
             },
             {
                 path: '/about',
@@ -42,6 +44,11 @@ export const routes = createBrowserRouter([
                 path: '/signup',
                 element: <SignUp></SignUp>
             },
+            {
+                path: '/comment/:id',
+                element: <Comment></Comment>,
+                loader: ({params}) => fetch (`http://localhost:5000/comment/${params.id}`),
+            }
         ]
     }
 ])

@@ -1,9 +1,47 @@
-import React from 'react';
-import { useLoaderData } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { useForm } from 'react-hook-form';
+import { Link, useLoaderData, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../Contexts/AuthProvider';
+import Comment from './Comment';
 
 const Details = () => {
   const details = useLoaderData()
-  console.log(details);
+  const {user,loading} = useContext(AuthContext)
+  const refresh = () => window.location.reload(true)
+  const id = details._id
+  // console.log(details);
+// console.log(user);
+const navigate = useNavigate()
+  const {register, handleSubmit,reset } = useForm();
+
+  const handleAddComment = data =>{
+    
+    const comment ={
+      comment : data.comment,
+      id : details._id,
+      name: user.displayName
+    }
+
+    fetch('http://localhost:5000/addComment',{
+                method: 'POST',
+                headers:{
+                    'content-type': 'application/json',
+                    
+                },
+                body: JSON.stringify(comment)
+            })
+            .then(res => res.json())
+            .then(result => {
+                console.log(result);
+                
+                reset()
+                navigate(`/comment/${id}`)
+            })
+    console.log(comment);
+  }
+  if(loading){
+    return <progress className="progress mt-56 mb-56 w-full"></progress>
+}
     return (
         <div className='m-28'>
             <div className="card  lg:card-side bg-base-100 shadow-xl">
@@ -11,13 +49,20 @@ const Details = () => {
   <div className="card-body ">
     <h2 className="card-title">Location: {details.address}</h2>
     <p>{details.mind}</p>
-    <input type="text" placeholder="Type here" className="input input-bordered input-primary w-full max-w-xs" />
+    <form onSubmit={handleSubmit(handleAddComment)}>
+    <input {...register("comment", {required: 'Comment is required'})}
+     type="text" placeholder="Type here" className="input input-bordered input-accent w-full max-w-xs" />
     <div className="card-actions justify-end">
-      <button className="btn btn-primary">Comment</button>
+    <input className='btn btn-accent w-40 m-5 '  value = 'Comment' type="submit" />
     </div>
+    </form>
+    <Link to={`/comment/${id}`}>See Comment</Link>
+    
   </div>
 </div>
+
         </div>
+        
     );
 };
 
