@@ -1,8 +1,16 @@
 import React from 'react';
+import { useForm } from 'react-hook-form';
 
-const Edit = () => {
+const Edit = ({dataAbout}) => {
+  // console.log(dataAbout);
+  const {register, handleSubmit } = useForm();
+
+  const handleAddEdit = data =>{
+    console.log(data);
+  }
+
     return (
-        <div>
+        <form onSubmit={handleSubmit(handleAddEdit)}>
             <input type="checkbox" id="my-modal-3" className="modal-toggle" />
 <div className="modal grid justify-center">
   <div className="modal-box relative">
@@ -12,34 +20,38 @@ const Edit = () => {
   <label className="label">
     <span className="label-text">Name</span>
   </label>
-  <input type="text" placeholder="Type here" className="input input-bordered w-full max-w-xs" />
+  <input {...register("name", {required: 'name is required'})}
+  type="text" defaultValue={dataAbout.name} placeholder="Type here" className="input input-bordered w-full max-w-xs" />
  
 </div>
     <div className="form-control w-full max-w-xs">
   <label className="label">
     <span className="label-text">Email</span>
   </label>
-  <input type="text" placeholder="Type here" className="input input-bordered w-full max-w-xs" />
+  <input {...register("email", {required: 'email is required'})}
+   type="text" defaultValue={dataAbout.email} placeholder="Type here" className="input input-bordered w-full max-w-xs" />
  
 </div>
     <div className="form-control w-full max-w-xs">
   <label className="label">
     <span className="label-text">University</span>
   </label>
-  <input type="text" placeholder="Type here" className="input input-bordered w-full max-w-xs" />
+  <input {...register("university", {required: 'university name is required'})}
+   type="text" defaultValue={dataAbout.university} placeholder="Type here" className="input input-bordered w-full max-w-xs" />
  
 </div>
     <div className="form-control w-full max-w-xs">
   <label className="label">
     <span className="label-text">Address</span>
   </label>
-  <input type="text" placeholder="Type here" className="input input-bordered w-full max-w-xs" />
+  <input {...register("address", {required: 'address is required'})}
+   type="text" defaultValue={dataAbout.address} placeholder="Type here" className="input input-bordered w-full max-w-xs" />
  
 </div>
 <input className='btn btn-accent w-40 m-5 ' value = 'Save' type="submit" />
   </div>
 </div>
-        </div>
+        </form>
     );
 };
 

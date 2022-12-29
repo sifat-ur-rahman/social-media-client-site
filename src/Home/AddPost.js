@@ -2,12 +2,12 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 
 const AddPost = () => {
-    const {register, formState:{errors}, handleSubmit } = useForm();
+    const {register, formState:{errors}, handleSubmit,reset } = useForm();
 
 
     const handleAddPost = data =>{
         const image = data.img[0]
-        console.log( data);
+        // console.log( data);
         const formData = new FormData()
         formData.append('image', image)
         const url =`https://api.imgbb.com/1/upload?key=a135457f4ca9a16c458962a3ed75df96`
@@ -19,7 +19,30 @@ const AddPost = () => {
         .then(imgData => {
            if(imgData.success){
             console.log(imgData.data.url);
-           
+            const post ={
+                address: data.address,
+                mind: data.mind,
+                img: imgData.data.url,
+                
+
+            }
+            console.log(post);
+
+            fetch('http://localhost:5000/addPost',{
+                method: 'POST',
+                headers:{
+                    'content-type': 'application/json',
+                    
+                },
+                body: JSON.stringify(post)
+            })
+            .then(res => res.json())
+            .then(result => {
+                console.log(result);
+                // toast.success(`${data.name} is added successfully`)
+                // navigate('/dashboard/manageDoctor')
+                reset()
+            })
     }})
 }
 

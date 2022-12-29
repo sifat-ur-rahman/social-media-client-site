@@ -3,6 +3,7 @@ import AddPost from './AddPost';
 import ViewPost from './ViewPost';
 
 const Home = () => {
+    
     return (
         <div>
             <AddPost></AddPost>
