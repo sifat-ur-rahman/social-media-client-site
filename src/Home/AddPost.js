@@ -39,8 +39,7 @@ const AddPost = () => {
             .then(res => res.json())
             .then(result => {
                 console.log(result);
-                // toast.success(`${data.name} is added successfully`)
-                // navigate('/dashboard/manageDoctor')
+               
                 reset()
             })
     }})

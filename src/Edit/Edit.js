@@ -1,12 +1,33 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
 const Edit = ({dataAbout}) => {
-  // console.log(dataAbout);
+  const navigate = useNavigate()
+  // console.log(dataAbout._id);
   const {register, handleSubmit } = useForm();
 
   const handleAddEdit = data =>{
-    console.log(data);
+    // console.log(data);
+    fetch( `http://localhost:5000/about/${dataAbout._id}`,{
+      method: 'PUT',
+      
+        headers:{
+          'content-type': 'application/json',
+          
+      },
+      body: JSON.stringify(data)
+      
+    })
+    .then(res => res.json())
+    .then(data => {
+      if(data.modifiedCount > 0){
+        alert('Information Updated')
+        
+    navigate('/about')
+      }
+      console.log(data);
+    })
   }
 
     return (
@@ -48,7 +69,7 @@ const Edit = ({dataAbout}) => {
    type="text" defaultValue={dataAbout.address} placeholder="Type here" className="input input-bordered w-full max-w-xs" />
  
 </div>
-<input className='btn btn-accent w-40 m-5 ' value = 'Save' type="submit" />
+<input className='btn btn-accent w-40 m-5 '  value = 'Save' type="submit" />
   </div>
 </div>
         </form>
