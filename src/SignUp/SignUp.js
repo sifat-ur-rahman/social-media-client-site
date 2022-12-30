@@ -5,14 +5,29 @@ import { useForm } from 'react-hook-form';
 
 // import useToken from '../../Hooks/UseToken';
 import { AuthContext } from '../Contexts/AuthProvider';
+import { GoogleAuthProvider } from 'firebase/auth';
 
 const SignUp = () => {
-    const {createUser, updateUser} = useContext(AuthContext)
+    const {createUser, updateUser, providerLogin} = useContext(AuthContext)
     const [signUpError, setSignUpError] = useState('')
     const {register, formState:{errors}, handleSubmit } = useForm();
-    const [createdUserEmail, setCreatedUserEmail] = useState('')
     
+
+    const googleProvider = new GoogleAuthProvider()
+
     const navigate = useNavigate()
+
+    const handleGoogleSignIn = () =>{
+        providerLogin(googleProvider)
+        .then(result =>{
+            const user = result.user;
+            console.log(user);
+            navigate('/')
+        })
+        .catch(error => console.error(error))
+    }
+    
+  
 
    
     const handleSignUp = (data) =>{
@@ -101,7 +116,7 @@ const SignUp = () => {
          </form>
          <p>Already have an account <Link className='text-secondary mt-5' to={'/login'}>Please Login</Link></p>
          <div className="divider">OR</div>
-         <button className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
+         <button onClick={handleGoogleSignIn} className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
             </div>
         </div>
     );
