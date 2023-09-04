@@ -1,5 +1,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-hot-toast';
 
 const AddPost = () => {
     const {register, formState:{errors}, handleSubmit,reset } = useForm();
@@ -38,6 +39,7 @@ const AddPost = () => {
             })
             .then(res => res.json())
             .then(result => {
+                toast.success("Post Successful")
                 console.log(result);
                
                 reset()
@@ -46,12 +48,12 @@ const AddPost = () => {
 }
 
     return (
-        <div>
-            <div className=' grid justify-items-center '>
-            <h2 className='text-4xl my-2'> Add A Post </h2>
+        <div className='grid justify-items-center mt-4'>
+            <div className='w-[442px] py-6 px-3 rounded-3xl bg-slate-800'>
+           
             <form onSubmit={handleSubmit(handleAddPost)}>
      
-     <div className='grid grid-cols-1 gap-2  justify-center'>
+     <div className='grid grid-cols-1 gap-2   justify-center'>
 
      <div className="form-control w-full max-w-md">
          
@@ -69,7 +71,7 @@ const AddPost = () => {
          className="file-input file-input-bordered file-input-success w-full max-w-md"/>
           {errors.img && <p className='text-red-600'>{errors.img?.message}</p>}
      </div>
-     <input className='btn btn-outline btn-success ml-4 ' value = 'Add Post' type="submit" />
+     <input className='btn btn-outline btn-success px-6 ml-4 ' value = 'Post' type="submit" />
      </div>
 
      </div>
