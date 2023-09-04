@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import signupImg from '../img/login.svg'
 import { AuthContext } from '../Contexts/AuthProvider';
 import { GoogleAuthProvider } from 'firebase/auth';
+import { toast } from 'react-hot-toast';
 
 const SignUp = () => {
     const {createUser, updateUser, providerLogin} = useContext(AuthContext)
@@ -19,10 +20,13 @@ const SignUp = () => {
         providerLogin(googleProvider)
         .then(result =>{
             const user = result.user;
-            console.log(user);
+            // console.log(user);
+            toast.success('Google login successfully')
             navigate('/')
         })
-        .catch(error => console.error(error))
+        .catch(error => {
+            toast.error('Something is wrong')
+            console.error(error)})
     }
     
     // const handleUpdateProfile = data =>{
@@ -79,13 +83,15 @@ const SignUp = () => {
             }
             updateUser(userInfo)
             .then(()=>{
-                
+                toast.success('Sign Up successfully')
                 navigate('/')
             })
-            .catch(err => console.error(err))
+            .catch(err => {
+                toast.error('Something is wrong')
+                console.error(err)})
         })
         .catch(err => {
-            console.error(err)
+            toast.error('Something is wrong')
             setSignUpError(err.message)
         })
     }

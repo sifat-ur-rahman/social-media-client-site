@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Contexts/AuthProvider';
 import loginImg from '../img/login.svg'
+import { toast } from 'react-hot-toast';
 // import { AuthContext } from '../../Contexts/AuthProvider';
 
 
@@ -25,10 +26,13 @@ const Login = () => {
         providerLogin(googleProvider)
         .then(result =>{
             const user = result.user;
-            console.log(user);
+            // console.log(user);
+            toast.success('Google login successfully')
             navigate(from, {replace: true})
         })
-        .catch(error => console.error(error))
+        .catch(error =>
+            {toast.error('Something is wrong')
+            console.error(error)})
     }
     const handleLogin = data =>{
         console.log(data);
@@ -36,12 +40,14 @@ const Login = () => {
         signIn(data.email, data.password)
         .then(result => {
             const user = result.user;
-            console.log(user);
+            // console.log(user);
+            toast.success('Login successfully')
             setLoginUserEmail(data.email)
             navigate(from, {replace: true})
+
         })
         .catch(err => {
-            console.error(err.message)
+            toast.error('Something is wrong')
             SetLoginError(err.message)
         })
     }
