@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import signupImg from '../img/login.svg'
 import { AuthContext } from '../Contexts/AuthProvider';
@@ -15,6 +15,8 @@ const SignUp = () => {
     const googleProvider = new GoogleAuthProvider()
 
     const navigate = useNavigate()
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
 
     const handleGoogleSignIn = () =>{
         providerLogin(googleProvider)
@@ -22,7 +24,7 @@ const SignUp = () => {
             const user = result.user;
             // console.log(user);
             toast.success('Google login successfully')
-            navigate('/')
+            navigate(from, { replace: true });
         })
         .catch(error => {
             toast.error('Something is wrong')
@@ -57,7 +59,7 @@ const SignUp = () => {
                     updateUser(userInfo)
                     .then(()=>{
                         toast.success('Sign Up successfully')
-                        navigate('/')
+                        navigate(from, { replace: true });
                     })
                     .catch(err => {
                         toast.error('Something is wrong')

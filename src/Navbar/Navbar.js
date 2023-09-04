@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../Contexts/AuthProvider';
+import { toast } from 'react-hot-toast';
 
 const Navbar = () => {
 
@@ -8,7 +9,7 @@ const Navbar = () => {
   // console.log(user)
     const handleLogOut = ()=>{
       logOut()
-      .then(()=>{})
+      .then(()=>{toast.success("User logout Success");})
       .catch(err => console.error(err))
     }
     return (
@@ -28,7 +29,7 @@ const Navbar = () => {
   <label tabIndex={0} className=" ">
   <div className="avatar">
   <div className="w-8 rounded-full ">
-    <img src={user.photoURL} alt='' />
+    <img src={user?.photoURL} alt='' />
   </div>
 </div>
 
