@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FaRegThumbsUp } from "react-icons/fa";
+import { FaEllipsisV, FaRegThumbsUp } from "react-icons/fa";
 
 const AllPostCard = ({data}) => {
   
-  const {address, mind, img, _id} = data
+  const {address, mind, img, _id, writer, writerImg} = data
   // console.log(address);
   const [count, setCount] = useState(3)
   
@@ -13,9 +13,30 @@ const AllPostCard = ({data}) => {
     setCount(newCount)
   }
     return (
-        <div className='mb-6'>
+        <div data-theme="business" className='mb-6'>
             <div>
+
              <div className="card card-compact w-96 bg-base-100 shadow-xl">
+              <section className='flex px-3 justify-between items-center'>
+              <div className='flex pt-3 pb-2 items-center'>
+              <div className="avatar online">
+  <div className="w-10  rounded-full ">
+    <img src={writerImg} alt='' />
+  </div>
+  
+</div>
+<p className='ml-3'>{writer}</p>
+              </div>
+              
+              <div className="dropdown">
+  <label tabIndex={0} className=" m-1"><FaEllipsisV/></label>
+  <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-28">
+    <li><a >Copy link</a></li>
+    <li><a>Item 2</a></li>
+  </ul>
+</div>
+              </section>
+              
   <figure><img src={img} alt="Shoes" /></figure>
   <div className="card-body">
     <h2 className="card-title">Location: {address}</h2>

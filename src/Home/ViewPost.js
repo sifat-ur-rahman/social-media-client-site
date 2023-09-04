@@ -4,14 +4,14 @@ import { useLoaderData } from 'react-router-dom';
 import PostCard from './PostCard';
 
 const ViewPost = () => {
-    const postData = useLoaderData()
-    console.log(postData);
+    const postsData = useLoaderData()
+    // console.log(postsData);
     return (
         <div className='grid justify-center mt-6 mb-6'>
             {
-                postData.map((pData)=> <PostCard
-                key={pData._id}
-                pData={pData}
+                postsData.map((postData)=> <PostCard
+                key={postData._id}
+                postData={postData}
                 ></PostCard>)
             }
            
