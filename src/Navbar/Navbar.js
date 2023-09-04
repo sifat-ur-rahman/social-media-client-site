@@ -33,7 +33,7 @@ const Navbar = () => {
 </div>
 
   </label>
-  <ul data-theme="luxury"  tabIndex={0} className="dropdown-content z-[1] menu  p-2 shadow bg-base-100 rounded-box w-40">
+  <ul data-theme="luxury"  tabIndex={0} className="dropdown-content z-[1] menu  p-2 shadow bg-base-100 rounded-box w-28">
   <li><button onClick={(handleLogOut)}>Sign Out</button></li>
   <li><Link to='/profile'>Profile</Link></li>
   </ul>

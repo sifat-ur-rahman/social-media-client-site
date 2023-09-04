@@ -10,7 +10,7 @@ const SignUp = () => {
     const {createUser, updateUser, providerLogin} = useContext(AuthContext)
     const [signUpError, setSignUpError] = useState('')
     const {register, formState:{errors}, handleSubmit } = useForm();
-    const [userPhoto, setUserPhoto] = useState()
+    
 
     const googleProvider = new GoogleAuthProvider()
 
@@ -29,37 +29,11 @@ const SignUp = () => {
             console.error(error)})
     }
     
-    // const handleUpdateProfile = data =>{
-    //     const image = data.img[0]
-    //     // console.log( data);
-    //     const formData = new FormData()
-    //     formData.append('image', image)
-    //     const url =`https://api.imgbb.com/1/upload?key=a135457f4ca9a16c458962a3ed75df96`
-    //     fetch(url, {
-    //         method: 'POST',
-    //         body: formData
-    //     })
-    //     .then(res => res.json())
-    //     .then(imgData => {
-    //        if(imgData.success){
-    //         // console.log(imgData.data.url);
-    //         const userInfo = {
-    //             displayName: data.name,
-    //             photoURL: imgData.data.url
-                
-    //         }
-    //         updateUser(userInfo)
-    //     }})
-    //     .catch(err => console.error(err))
-    
-    // }
 
    
     const handleSignUp = (data) =>{
-        console.log(data);
+        // console.log(data);
         setSignUpError('');
-      
-        
         const image = data.img[0]
         // console.log( data);
         const formData = new FormData()
@@ -71,29 +45,34 @@ const SignUp = () => {
         })
         .then(res => res.json())
         .then(imgData => {
-            setUserPhoto(imgData.data.url)
-        })
-        .catch(err => console.error(err))
-        createUser(data.email, data.password)
-        .then(result => {
-            const userInfo = {
-                displayName: data.name,
-                photoURL: userPhoto
-                
+            if (imgData.success) {
+                createUser(data.email, data.password)
+                .then((result) => {
+                    const user = result.user;
+                    const userInfo = {
+                        displayName: data.name,
+                        photoURL: imgData.data.url
+                        
+                    }
+                    updateUser(userInfo)
+                    .then(()=>{
+                        toast.success('Sign Up successfully')
+                        navigate('/')
+                    })
+                    .catch(err => {
+                        toast.error('Something is wrong')
+                        console.error(err)})
+                }
+                )
+                .catch(err => {
+                    toast.error('Something is wrong')
+                    setSignUpError(err.message)
+                })
             }
-            updateUser(userInfo)
-            .then(()=>{
-                toast.success('Sign Up successfully')
-                navigate('/')
-            })
-            .catch(err => {
-                toast.error('Something is wrong')
-                console.error(err)})
+            
+            
         })
-        .catch(err => {
-            toast.error('Something is wrong')
-            setSignUpError(err.message)
-        })
+   
     }
 
     
