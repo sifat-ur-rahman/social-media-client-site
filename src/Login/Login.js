@@ -3,6 +3,7 @@ import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Contexts/AuthProvider';
+import loginImg from '../img/login.svg'
 // import { AuthContext } from '../../Contexts/AuthProvider';
 
 
@@ -48,18 +49,24 @@ const Login = () => {
 
 
     return (
-        <div className='h-[800px] flex justify-center items-center' >
-            <div className='w-96 p-7'>
-                <h2 className='text-xl text-center'>Login</h2>
+        <div className='' >
+             <h2 className='text-4xl font-bold text-center mt-4'>Login</h2>
+            <section className='m-12 flex justify-center items-center content-center'>
+            <div>
+                <img src={loginImg} alt="" />
+            </div>
+            <div className='self-center px-7'>
+               
             <form onSubmit={handleSubmit(handleLogin)}>
      
             <div className="form-control w-full max-w-xs">
                 <label className="label">
                      <span className="label-text">Email</span>
                 </label>
-                <input type="text" 
+                <input type="email" 
+                placeholder='Your register email'
                 {...register("email", {required: 'Email Address is required'})}
-                 className="input input-bordered w-full max-w-xs"/>
+                 className="input input-bordered input-success w-full max-w-xs"/>
                  {errors.email && <p className='text-red-600'>{errors.email?.message}</p>}
             </div>
             <div className="form-control w-full max-w-xs">
@@ -67,24 +74,24 @@ const Login = () => {
                      <span className="label-text">Password</span>
                 </label>
                 <input type="password" 
-                {...register("password", {required: 'Password Address is required', minLength: {value: 6, message: 'password must be 6 characters'},})}
-                 className="input input-bordered w-full max-w-xs"/>
+                placeholder='Your account password'
+                {...register("password", {required: 'Password  is required', minLength: {value: 6, message: 'password must be 6 characters'},})}
+                 className="input input-bordered input-success w-full max-w-xs"/>
                  {errors.password && <p className='text-red-600'>{errors.password?.message}</p>}
-                <label className="label">
-                     <span className="label-text">Forget Password?</span>
-                </label>
+                
             </div>
 
             
-                <input className='btn btn-accent w-full' value = 'Login' type="submit" />
+                <input className='btn btn-accent w-full mt-5' value = 'Login' type="submit" />
 
                 {loginError && <p className='text-red-500'>{loginError}</p>}
          </form>
-         <p>New to Friend Ster? <Link className='text-secondary mt-5' to={'/signup'}>Create new account</Link></p>
+         <p className='mt-3'>New to Friend Ster ? <Link className='text-secondary ' to={'/signup'}>Create new account</Link></p>
          <div className="divider">OR</div>
          <button onClick={handleGoogleSignIn}
-          className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
+          className='btn btn-outline btn-warning w-full'>CONTINUE WITH GOOGLE</button>
             </div>
+            </section>
         </div>
     );
 };

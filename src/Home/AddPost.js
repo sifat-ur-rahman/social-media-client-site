@@ -84,7 +84,7 @@ const AddPost = () => {
      </div>
      
      <div className='grid place-content-end'>
-     <input className='btn btn-accent w-40 m-5 ' value = 'Add Post' type="submit" />
+     <input className='btn btn-outline btn-success w-40 m-5 ' value = 'Add Post' type="submit" />
      </div>
      
         

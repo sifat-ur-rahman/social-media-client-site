@@ -17,12 +17,12 @@ export const routes = createBrowserRouter([
         children:[
             {
                 path:'/',
-                element: <Home></Home>,
+                element:<PrivateRoute><Home/></PrivateRoute> ,
                 loader: () => fetch (`https://social-media-server-gray.vercel.app/3posts`)
             },
             {
                 path: '/allPost',
-                element: <AllPost></AllPost>,
+                element:<PrivateRoute><AllPost/></PrivateRoute> ,
                 loader: () => fetch (`https://social-media-server-gray.vercel.app/viewPost`)
             },
             {

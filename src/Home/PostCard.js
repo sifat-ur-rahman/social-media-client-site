@@ -11,8 +11,8 @@ const PostCard = ({pData}) => {
     setCount(newCount)
   }
     return (
-        <div className='mb-6'>
-             <div className="card card-compact w-96 bg-base-100 shadow-xl">
+        <div data-theme="business" className='mb-6 rounded-2xl'>
+             <div className="card  card-compact w-96 bg-base-100 shadow-xl">
   <figure><img src={img} alt="Shoes" /></figure>
   <div className="card-body">
     <h2 className="card-title">Location: {address}</h2>
