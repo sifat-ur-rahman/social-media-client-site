@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
+import { AuthContext } from '../Contexts/AuthProvider';
 
 const AddPost = () => {
+    const {user} = useContext(AuthContext)
     const {register, formState:{errors}, handleSubmit,reset } = useForm();
-
+    console.log(user)
 
     const handleAddPost = data =>{
         const image = data.img[0]
@@ -21,10 +23,12 @@ const AddPost = () => {
            if(imgData.success){
             console.log(imgData.data.url);
             const post ={
-               
+               writer:user.displayName,
+               writerImg:user?.photoURL,
+               writerEmail:user?.email,
                 mind: data.mind,
                 img: imgData.data.url,
-                 time: new Date(),
+                time: new Date(),
 
             }
             console.log(post);
