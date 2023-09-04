@@ -20,10 +20,10 @@ const AddPost = () => {
            if(imgData.success){
             console.log(imgData.data.url);
             const post ={
-                address: data.address,
+               
                 mind: data.mind,
                 img: imgData.data.url,
-                
+                 time: new Date(),
 
             }
             console.log(post);
@@ -47,46 +47,32 @@ const AddPost = () => {
 
     return (
         <div>
-            <div className=' mx-4  '>
-            <h2 className='text-4xl text-center'> Add A Post </h2>
+            <div className=' grid justify-items-center '>
+            <h2 className='text-4xl my-2'> Add A Post </h2>
             <form onSubmit={handleSubmit(handleAddPost)}>
      
-     <div className='grid grid-cols-3 gap-4 justify-center'>
-     <div className="form-control w-full max-w-xs">
-         <label className="label">
-              <span className="label-text">Address</span>
-         </label>
+     <div className='grid grid-cols-1 gap-2  justify-center'>
+
+     <div className="form-control w-full max-w-md">
+         
          <input type="text" 
-         {...register("address", {required: 'Address is required'})}
-          className="input input-bordered input-success w-full max-w-xs"/>
-          {errors.address && <p className='text-red-600'>{errors.address?.message}</p>}
-     </div>
-     <div className="form-control w-full max-w-xs">
-         <label className="label">
-              <span className="label-text">What's on your mind?</span>
-         </label>
-         <input type="text" 
+         placeholder="What's on your mind?"
          {...register("mind", {required: 'mind is required'})}
-          className="input input-bordered input-success w-full max-w-xs"/>
+          className="input input-bordered input-success w-full "/>
           {errors.mind && <p className='text-red-600'>{errors.mind?.message}</p>}
      </div>
-    
+    <div className='flex items-center justify-items-center'>
      <div className="form-control w-full max-w-xs">
-         <label className="label">
-              <span className="label-text">Photo</span>
-         </label>
+         
          <input type="file" 
          {...register("img", {required: 'photo is required'})}
-         className="file-input file-input-bordered file-input-success w-full max-w-xs"/>
+         className="file-input file-input-bordered file-input-success w-full max-w-md"/>
           {errors.img && <p className='text-red-600'>{errors.img?.message}</p>}
+     </div>
+     <input className='btn btn-outline btn-success ml-4 ' value = 'Add Post' type="submit" />
      </div>
 
      </div>
-     
-     <div className='grid place-content-end'>
-     <input className='btn btn-outline btn-success w-40 m-5 ' value = 'Add Post' type="submit" />
-     </div>
-     
         
 
          
